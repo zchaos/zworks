@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="aptana" default="download_eclipse_plugins">
+	<target name="download_eclipse_plugins">
+		<property name="aptana" value="/ztmp/eclipse/plugins/aptana" />
+		<p2.mirror destination="file:/${aptana}" description="aptana" verbose="true">
+			<source>
+				<repository name="aptana" location="http://download.aptana.com/studio3/plugin/install" />
+			</source>
+			<slicingOptions includeFeatures="true" followStrict="true" latestVersionOnly="true" />
+		</p2.mirror>
+	</target>
+</project>
