@@ -12,8 +12,8 @@ public class DependenciesSortStartup implements IStartup {
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		workbench.getDisplay().asyncExec(new Runnable() {
 			public void run() {
-//				DependenciesSort ds = new DependenciesSort();
-//				ds.sort();
+				DependenciesSort ds = new DependenciesSort();
+				ds.sort();
 			}
 		});
 	}
