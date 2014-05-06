@@ -1,4 +1,4 @@
-package zplugins;
+package zchaos;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

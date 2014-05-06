@@ -3,8 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Zplugins
 Bundle-SymbolicName: zplugins;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: zplugins.Activator
+Bundle-Activator: zchaos.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.jdt;bundle-version="3.9.1",
+ org.eclipse.jdt.core;bundle-version="3.9.2",
+ org.eclipse.jdt.ui;bundle-version="3.9.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
