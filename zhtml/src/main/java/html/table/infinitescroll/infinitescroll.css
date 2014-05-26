@@ -1,0 +1,30 @@
+.grid-view {
+	width: 400px;
+	height: 300px;
+	position: relative;
+	overflow: auto;
+}
+.grid-height-overflow {
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	top: 1000px;
+	left: 0px;
+}
+.grid-view-table {
+	position: absolute;
+	border-collapse: collapse;
+	width: 100%;
+}
+.grid-head-col {
+	line-height: 0px;
+	padding:0px;
+}
+.grid-body-col {
+	border: 1px solid black;
+}
+
+.grid-body-content {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
