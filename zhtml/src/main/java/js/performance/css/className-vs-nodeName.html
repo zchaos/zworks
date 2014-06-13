@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试closest时用className和nodeName的速度</title>
+	</head>
+	<body>
+		<table id="result" class="result class1 class2">
+			<tr>
+				<td>调用className，用时:</td>
+				<td id="className"></td>
+			</tr>
+			<tr>
+				<td>调用nodeName，用时:</td>
+				<td id="nodeName"></td>
+			</tr>
+			<tr style="display:none;">
+				<td><span id="startdom"></span></td>
+			</tr>
+		</table>
+		<script>
+			var hclassName = document.getElementById("className");
+			var hnodeName = document.getElementById("nodeName");
+
+			var hstartdom = document.getElementById("startdom");
+
+			var count = 1000 * 1000;
+
+			var SPACE = "";
+			function hasClass(dom, className) {
+				if (!dom || dom.nodeType !== 1) {
+					return false;
+				}
+				var cls = dom.className;
+				if (!cls) {
+					return false;
+				}
+				var len1 = cls.length;
+				var len2 = className.length;
+				if (len1 < len2) {
+					return false;
+				} else if (len1 === len2) {
+					return cls === className;
+				}
+				var index = cls.indexOf(className);
+				if (index < 0) {
+					return false;
+				} else if (index === 0) {
+					return cls.charAt(index + len2) === SPACE;
+				} else if (index + len2 === len1) {
+					return cls.charAt(index - 1) === SPACE;
+				} else {
+					return cls.charAt(index - 1) === SPACE && cls.charAt(index + len2) === SPACE;
+				}
+			};
+
+			function closestClass(dom, className) {
+				if (!dom || !className) {
+					return null;
+				}
+				var p = dom;
+				while (p != null && !hasClass(p, className)) {
+					p = p.parentNode;
+				}
+				return p;
+			};
+			function closestTag(dom, tag) {
+				if (!dom || !tag) {
+					return null;
+				}
+				var p = dom;
+				var nodeName = dom.nodeName;
+				while (p != null && nodeName && nodeName.toLowerCase() !== tag) {
+					p = p.parentNode;
+					nodeName = p ? p.nodeName : null;
+				}
+				return p;
+			};
+
+			var d1 = new Date();
+			for (var i = 0; i < count; i++) {
+				closestClass(hstartdom, "result");
+			}
+			var d2 = new Date();
+			for (var i = 0; i < count; i++) {
+				closestTag(hstartdom, "table");
+			}
+			var d3 = new Date();
+
+			hclassName.innerHTML = d2 - d1;
+			hnodeName.innerHTML = d3 - d2;
+		</script>
+	</body>
+</html>

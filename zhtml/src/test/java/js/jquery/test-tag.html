@@ -7,16 +7,17 @@
 		<meta http-equiv="Expires" content="0"/>
 		<meta name="sz-context-path" content="/succezbi"/>
 		<title>jquery测试页面</title>
-		<script src="../../../../main/java/source/jquery/jquery-1.7.2.js"></script>
 	</head>
 	<body>
-		<div class="demo" style="display: none;">
-			123
-		</div>
+		<div></div>
 		<script>
-			var $demo = $(".demo");
-			debugger;
-			alert($demo.width());
+			var divs = document.getElementsByTagName("div");
+			alert(divs.length);
+			var elem = document.createElement("div");
+			document.body.appendChild(elem);
+			alert(divs.length);
+			divs = document.getElementsByTagName("div");
+			alert(divs.length);
 		</script>
 	</body>
 </html>

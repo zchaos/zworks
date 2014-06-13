@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试表格的text-overflow:ellipsis样式</title>
+	</head>
+	<body>
+		<style>
+			.container {
+				background: red;
+			}
+			.inner {
+				background: blue;
+			}
+			.class-relative {
+				position: relative;
+				width: 200px;
+				height: 50px;
+				background: red;
+			}
+			.inner-relative {
+				position: relative;
+				width: 100%;
+				height: 50%;
+			}
+			.container-pading {
+				padding: 10px;
+			}
+			.inner-padding {
+				padding: 5px;
+			}
+		</style>
+		容器无border,padding,margin。内部控件无border,padding,margin
+		<div class="container class-relative container-none">
+			<div class="inner inner-relative inner-none"></div>
+		</div>
+
+		容器无border,margin,有padding。内部控件无border,padding,margin
+		<div class="container class-relative container-pading">
+			<div class="inner inner-relative inner-none"></div>
+		</div>
+		容器无border,margin,有padding。内部控件无border,margin,有padding
+		<div class="container class-relative container-pading">
+			<div class="inner inner-relative inner-padding"></div>
+		</div>
+	</body>
+</html>

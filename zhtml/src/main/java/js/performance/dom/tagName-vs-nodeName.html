@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试js访问window的方法和对象方法的速度</title>
+	</head>
+	<body>
+		<table id="result">
+			<tr>
+				<td>调用firstchild，用时:</td>
+				<td id="firstchild"></td>
+			</tr>
+			<tr>
+				<td>调用childnodes，用时:</td>
+				<td id="childnodes"></td>
+			</tr>
+		</table>
+		<script>
+			var hresult = document.getElementById("result");
+			alert(hresult.tagName + " " + hresult.nodeName);
+		</script>
+	</body>
+</html>

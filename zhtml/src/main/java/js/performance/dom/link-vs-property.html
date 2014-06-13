@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试link获得href和属性的速度</title>
+		<link href="a.css" />
+	</head>
+	<body>
+		<table id="result">
+			<tr>
+				<td>调用link，用时:</td>
+				<td id="link"></td>
+			</tr>
+			<tr>
+				<td>调用property，用时:</td>
+				<td id="property"></td>
+			</tr>
+		</table>
+		<script>
+			var hlink = document.getElementById("link");
+			var hproperty = document.getElementById("property");
+
+			var link = document.getElementsByTagName("link")[0];
+			link.prophref = link.href;
+			var count = 1000 * 1000;
+
+			var d1 = new Date();
+			for (var i = 0; i < count; i++) {
+				link.href
+			}
+			var d2 = new Date();
+			for (var i = 0; i < count; i++) {
+				link.prophref
+			}
+			var d3 = new Date();
+
+			hlink.innerHTML = d2 - d1;
+			hproperty.innerHTML = d3 - d2;
+		</script>
+	</body>
+</html>

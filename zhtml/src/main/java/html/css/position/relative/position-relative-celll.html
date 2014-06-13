@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试单元格中得控件设置position样式</title>
+	</head>
+	<body>
+		单元格有两个子控件，第二个子控件居右显示
+		<style>
+			.class-table {
+				border-collapse: collapse;
+			}
+			.class-table td {
+				border: 1px solid black;
+			}
+			.class-body-col {
+			}
+			.head-col {
+				width: 100px;
+			}
+			.col-content{
+				position:relative;
+			}
+			.dropdown {
+				position: relative;
+				right: 0px;
+			}
+		</style>
+		<table class="class-table class-table-max-width" cellpadding="0">
+			<thead>
+				<tr>
+					<td class="head-col"></td>
+				</tr>
+			</thead>
+			<tr>
+				<td class="class-body-col"><span class="col-content">11</span><span class="dropdown">22</span></td>
+			</tr>
+		</table>
+	</body>
+</html>

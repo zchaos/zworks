@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试js创建new Date的速度</title>
+	</head>
+	<body>
+		循环次数:
+		<input id="loop" value="10000" /><button onclick="test()">开始测试</button>
+		<hr>
+		<table>
+			<tr>
+				<td>执行一次的时间:</td>
+				<td id="one"></td>
+			</tr>
+			<tr>
+				<td>执行一次的时间*2:</td>
+				<td id="mone"></td>
+			</tr>
+			<tr>
+				<td>执行二次的时间:</td>
+				<td id="two"></td>
+			</tr>
+		</table>
+		<script>
+			var hloop = document.getElementById("loop");
+			var hone = document.getElementById("one");
+			var hmone = document.getElementById("mone");
+			var htwo = document.getElementById("two");
+
+			function test() {
+				var loop = hloop.value;
+
+				var d;
+				var d1 = new Date();
+				for (var i = 0; i < loop; i++) {
+					d = new Date();
+				}
+				var d2 = new Date();
+				for (var i = 0; i < loop; i++) {
+					d = new Date();
+					d = new Date();
+				}
+				var d3 = new Date();
+
+				var t1 = d2 - d1;
+				var t2 = d3 - d2;
+				hone.innerHTML = t1;
+				hmone.innerHTML = t1 * 2;
+				htwo.innerHTML = t2;
+			}
+
+		</script>
+	</body>
+</html>

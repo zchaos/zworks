@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<script src="../../../source/jquery/jquery-1.7.2.js"></script>
+		<title>测试script获得src和属性的速度</title>
+	</head>
+	<body>
+		<table id="result">
+			<tr>
+				<td>调用src，用时:</td>
+				<td id="src"></td>
+			</tr>
+			<tr>
+				<td>调用property，用时:</td>
+				<td id="property"></td>
+			</tr>
+		</table>
+		<script>
+			var hsrc = document.getElementById("src");
+			var hproperty = document.getElementById("property");
+
+			var script = document.getElementsByTagName("script")[0];
+			script.propsrc = script.src;
+			var count = 1000 * 1000;
+
+			var d1 = new Date();
+			for (var i = 0; i < count; i++) {
+				script.src
+			}
+			var d2 = new Date();
+			for (var i = 0; i < count; i++) {
+				script.propsrc
+			}
+			var d3 = new Date();
+
+			hsrc.innerHTML = d2 - d1;
+			hproperty.innerHTML = d3 - d2;
+		</script>
+	</body>
+</html>

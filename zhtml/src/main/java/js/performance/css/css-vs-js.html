@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试js设置样式和addClass的速度</title>
+	</head>
+	<body>
+		<style>
+			.display-none {
+				display: none;
+			}
+		</style>
+		循环次数:
+		<input id="loop" value="10000" />
+		<button onclick="test()">
+			开始测试
+		</button>
+		<hr>
+		<table>
+			<tr>
+				<td>js设置display:none:</td>
+				<td id="jsnone"></td>
+			</tr>
+			<tr>
+				<td>css设置display:none:</td>
+				<td id="cssnone"></td>
+			</tr>
+		</table>
+
+		<span id="testdom" class="class1">test</span>
+		<script>
+			var hloop = document.getElementById("loop");
+			var hjsnone = document.getElementById("jsnone");
+			var hcssnone = document.getElementById("cssnone");
+			var htestdom = document.getElementById("testdom");
+
+			function test() {
+				var loop = hloop.value;
+				var className = "display-none";
+
+				var d1 = new Date();
+				for (var i = 0; i < loop; i++) {
+					addClass(htestdom, className);
+					removeClass(htestdom, className);
+				}
+				var d2 = new Date();
+				for (var i = 0; i < loop; i++) {
+					hide(htestdom);
+					show(htestdom);
+				}
+				var d3 = new Date();
+
+				hcssnone.innerHTML = d2 - d1;
+				hjsnone.innerHTML = d3 - d2;
+			}
+
+			var SPACE = " ";
+			var rspace = /\s+/;
+			function hasClass(cls, className) {
+				var len1 = cls.length;
+				var len2 = className.length;
+				if (len1 < len2) {
+					return false;
+				} else if (len1 === len2) {
+					return cls === className;
+				}
+				var index = cls.indexOf(className);
+				if (index < 0) {
+					return false;
+				} else if (index === 0) {
+					return cls.charAt(index + len2) === SPACE;
+				} else if (index + len2 === len1) {
+					return cls.charAt(index - 1) === SPACE;
+				} else {
+					return cls.charAt(index - 1) === SPACE && cls.charAt(index + len2) === SPACE;
+				}
+			};
+
+			function addClass(dom, className) {
+				var cls = dom.className;
+				if (!cls) {
+					dom.className = className;
+					return;
+				}
+				if (hasClass(cls, className)) {
+					return;
+				}
+				dom.className = cls + " " + className;
+			};
+
+			function removeClass(dom, className) {
+				var cls = dom.className;
+				if (!cls) {
+					return;
+				}
+				var rs = cls.split(rspace);
+				var index = rs.indexOf(className);
+				if (index < 0) {
+					return;
+				}
+				rs.splice(index, 1);
+				dom.className = rs.join(SPACE);
+			};
+
+			function hide(dom) {
+				var display = css(dom, "display");
+				if (display === "none") {
+					return;
+				}
+				var olddisplay = dom.olddisplay;
+				if (!olddisplay) {// 记录显示时的display,显示时会用到
+					dom.olddisplay = display;
+				}
+				dom.style.display = "none";
+			};
+			function show(dom) {
+				var display = css(dom, "display");
+				if (display !== "none") {
+					return;
+				}
+				var olddisplay = dom.olddisplay;
+				if (!olddisplay) {// 记录显示时的display,显示时会用到
+					dom.style.display = "";
+				} else {
+					dom.style.display = olddisplay;
+				}
+			};
+
+			function _currentStyle(dom) {
+				var defaultView = document.defaultView;
+				return defaultView ? defaultView.getComputedStyle(dom, null) : dom.currentStyle;
+			};
+			function css(dom, css) {
+				var rs = dom.style[css];
+				if (rs) {
+					return rs;
+				}
+
+				var currentStyle = _currentStyle(dom);
+				return currentStyle[css];
+			};
+		</script>
+	</body>
+</html>

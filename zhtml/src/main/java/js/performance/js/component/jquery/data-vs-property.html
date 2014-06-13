@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta name="sz-context-path" content="/succezbi"/>
+		<title>测试js访问用jQuery存储数据和dom的属性存储数据的速度</title>
+		<script src="../../../source/jquery/jquery-1.7.2.js"></script>
+	</head>
+	<body>
+		<table id="result">
+			<tr>
+				<td>调用jQuery.data，用时:</td>
+				<td id="jdata"></td>
+			</tr>
+			<tr>
+				<td>调用dom.xx，用时:</td>
+				<td id="ddata"></td>
+			</tr>
+			<tr>
+				<td>调用自定义data，用时:</td>
+				<td id="cdata"></td>
+			</tr>
+		</table>
+		<script>
+			var hjdata = document.getElementById("jdata");
+			var hddata = document.getElementById("ddata");
+			var hcdata = document.getElementById("cdata");
+
+			var hresult = document.getElementById("result");
+
+			var guid = 1;
+			var wdata = window.cachedata = {};
+			function cdata1(dom, key, value) {
+				var id = dom.guid;
+				if (!id) {
+					dom.guid = id = guid++;
+				}
+				var cache = wdata[id];
+				if (!cache) {
+					cache = wdata[id] = {};
+				}
+				cache[key] = value;
+			}
+
+			function cdata2(dom, key, value) {
+				var id = dom.guid;
+				if (!id) {
+					dom.guid = id = guid++;
+				}
+				wdata[id + "-" + key] = value;
+			}
+
+			function cdata3(dom, key, value) {
+				var id = dom.guid;
+				if (!id) {
+					dom.guid = id = guid++;
+				}
+				wdata[id + key] = value;
+			}
+
+			function cdata(dom, key, value) {
+				var id = dom.guid;
+				if (!id) {
+					dom.guid = id = guid++;
+				}
+				var index = id % 1000;
+				var mcache = wdata[index];
+				if (!mcache) {
+					mcache = wdata[index] = {};
+				}
+				var cache = mcache[id];
+				if (!cache) {
+					cache = mcache[id] = {};
+				}
+				cache[key] = value;
+			}
+
+			var count = 1000 * 1000;
+			var count = 1;
+
+			var obj = {};
+			var $result = $(hresult);
+			var d1 = new Date();
+			for (var i = 0; i < count; i++) {
+				$result.data("d", obj);
+			}
+			var d2 = new Date();
+			for (var i = 0; i < count; i++) {
+				hresult.d = obj;
+			}
+			var d3 = new Date();
+			for (var i = 0; i < count; i++) {
+				cdata1(hresult, "d", obj);
+			}
+			var d4 = new Date();
+
+			hjdata.innerHTML = d2 - d1;
+			hddata.innerHTML = d3 - d2;
+			hcdata.innerHTML = d4 - d3;
+		</script>
+	</body>
+</html>
