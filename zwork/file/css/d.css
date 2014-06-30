@@ -1,1 +1,51 @@
 @charset "utf-8";
+
+.sz-ci-cellinplace-editor {
+	z-index: 9995;//sectionbox的z-index为9993，此控件需要比sectionbox的z-index高
+	position: absolute;
+	background-color: white;
+}
+.sz-ci-celleditor-num {
+}
+.sz-ci-celleditor-txt {
+}
+
+/*文本编辑器的样式和数值编辑器的样式*/
+.ciinputcomponent-num {
+	margin: 0px;
+	width: 100%;
+	height: auto;
+	position: absolute;
+	/*没有设置left:0px;top:0px;时，输入框的位置不正确*/
+	left: 0px;
+	top: 0px;
+}
+.sz-commons-numberinput-i {
+	width: 100%;
+	padding: 0px;
+	outline: none;//去掉输入框的边框高亮
+	border: none;
+}
+/* 打包后，出现输入框超出了单元格的宽度，原因是样式优先级比较低，将样式写入到.sz-ci-cellinplace-editor,提高样式优先级 */
+/* 编辑器的通用样式 */
+/* ie7中不支持box-sizing,这里设置了padding:2px，会让编辑器超出单元格 */
+.sz-ci-cellinplace-input {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+}
+.ciinputcomponent-text {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	/*没有设置left:0px;top:0px;时，输入框的位置不正确*/
+	left: 0px;
+	top: 0px;
+	padding: 0px;
+	outline: none;//去掉输入框的边框高亮
+	border: none;
+}
+.sz-commons-form-textarea {
+	outline: none;
+}
